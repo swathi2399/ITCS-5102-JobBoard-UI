@@ -1,38 +1,75 @@
+/* all components */
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
   min-height: 100vh;
+  align-items: top;
+  justify-content: center; 
+  background-image: linear-gradient(79deg, #e2e2b5, #dad9b0, 48%, #bfdfbf);
+}
+
+/* nav bar on top */
+.navbar {
+  padding: 20px;
+  background-image: linear-gradient(79deg, #e2e2b5, #dad9b0, 48%, #bfdfbf);
+  display: flex;
+  justify-content: center;
+  /* align-items: flex-start ; */
+  margin: 0 auto;
+  border-bottom: 5px solid #f2f2f2;
+}
+
+
+.login {
+  padding:100px;
+}
+.registration {
+  padding:100px;
+}
+
+/* .reg-form .fields {
+  padding-top: 100px;
+  display: inline-block;
+  
+} */
+ /* .fields label {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 150px;
+} */
+
+  .reg-form .field input{ 
+  margin: 3px;
+  display: inline block;
+  padding: 0.8rem;
+  border-color: black;
+  border-radius: 10px;
+  text-decoration: solid;
+  outline:none;
+} 
+
+ .reg-form button{
+  border: none;
+  background-color: white;
+  padding:5px;
+  margin-top: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.link-btn{
+  background: none;
+  border: none;
+  padding:18px;
+  color: black;
+  font-size: medium;
+  font-weight: bold;
+  text-decoration: underline;
+} 
+
+/* .auth-form-container, .login-form, .register-form{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */

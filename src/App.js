@@ -4,27 +4,20 @@ import {Link} from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Registration from './components/Registration';
 import Login from './components/Login';
-
-
+import NavBar from './components/NavBar';
 
 
 function App() {
   
-  const addUser = async(user) => {
-    const request = {
-      ...user,
-    };
-    const response = await api.post("/users",request)
-    console.log(response.data);
-    
-
-  }
+  
   return (
-    <div className="App">
+   
       <Router>
+        <NavBar />
+        <div className="App">
         <Switch>
           <Route exact path = "/">
-            <Registration addUser = {addUser} />
+            <Registration />
           </Route>
           <Route exact path ="/login">
             <Login/>
@@ -32,10 +25,9 @@ function App() {
         </Switch>
 
     
-
-      
+        </div>
       </Router>
-    </div>
+    
   );
 }
 

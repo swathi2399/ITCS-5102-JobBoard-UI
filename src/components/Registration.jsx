@@ -1,33 +1,32 @@
 import React from 'react';
 import { useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
+import axios from 'axios'
 
-const Registration = ({addUser}) => {
+const Registration = () => {
     const [firstname,setFirst] = useState('');
     const [lastname,setLast] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-
-  
-
-    const handleSubmit = (e) => {
+    const history = useHistory();
+    const handleSubmit = async(e) => {
         e.preventDefault();
         if(firstname === "" || lastname === "" || email === "" || password === "") {
             alert("All the fields are mandatory")
             return
         }
-        const user = {firstname,lastname,email,password};
-        addUser(user);
-        setFirst('');
-        setLast('');
-        setEmail('');
-        setPassword('');
+    const res = await axios.post("https://localhost:8080/api/v1/auth/register", {
+            firstname,
+            lastname,
+            email,
+            password
+          },{withCredentials: true});
+          if (res.data) {
+            console.log(res.data);
+            return history.push("/login");
+          }
+        }
 
-
-
-        
-
-    }
     return (
     <div>
           <div className="registration">
@@ -77,12 +76,12 @@ const Registration = ({addUser}) => {
                     />
                  </div>
                 
-                 <button className="ui button blue">Sign Up</button>
+                 <button className="btn">Sign Up</button>
              </form>
              <Link to="/login">
-             <button>Already have an account? Sign In</button>
+             <button className='link-btn'>Already have an account? Sign In</button>
              </Link>
-             {/* onClick={() => onFormSwitch('Login')} */}
+           
          </div>
 
       
