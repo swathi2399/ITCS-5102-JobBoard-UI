@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import api from './api/users';
 import './App.css';
+import {Link} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Registration from './components/Registration';
+import Login from './components/Login';
+
+
+
 
 function App() {
+  
+  const addUser = async(user) => {
+    const request = {
+      ...user,
+    };
+    const response = await api.post("/users",request)
+    console.log(response.data);
+    
+
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+          <Route exact path = "/">
+            <Registration addUser = {addUser} />
+          </Route>
+          <Route exact path ="/login">
+            <Login/>
+          </Route>
+        </Switch>
+
+    
+
+      
+      </Router>
     </div>
   );
 }
