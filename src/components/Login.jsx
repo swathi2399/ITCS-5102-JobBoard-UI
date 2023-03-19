@@ -14,10 +14,10 @@ const Login = () => {
     }
 
     console.log(email, password);
-    const res = await axios.post("https://localhost:8080/api/v1/auth/authenticate", {
+    const res = await axios.post("http://localhost:8080/api/v1/auth/authenticate", {
       email,
       password
-    },{withCredentials: true});
+    },{withCredentials: false});
     if (res.data) {
       console.log(res.data);
     }

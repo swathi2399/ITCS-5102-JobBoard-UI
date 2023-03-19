@@ -10,21 +10,27 @@ const Registration = () => {
     const [password,setPassword] = useState('');
     const history = useHistory();
     const handleSubmit = async(e) => {
-        e.preventDefault();
-        if(firstname === "" || lastname === "" || email === "" || password === "") {
-            alert("All the fields are mandatory")
-            return
-        }
-    const res = await axios.post("https://localhost:8080/api/v1/auth/register", {
-            firstname,
-            lastname,
-            email,
-            password
-          },{withCredentials: true});
-          if (res.data) {
-            console.log(res.data);
-            return history.push("/login");
-          }
+        try {
+            e.preventDefault();
+            if(firstname === "" || lastname === "" || email === "" || password === "") {
+                alert("All the fields are mandatory")
+                return
+            }
+            const res = await axios.post("http://localhost:8080/api/v1/auth/register", {
+                    firstname,
+                    lastname,
+                    email,
+                    password
+                },{withCredentials: false});
+                if (res.data) {
+                    console.log(res.data);
+                    return history.push("/login");
+                }
+            } catch (err) {
+                console.log(err)
+            }
+        
+        
         }
 
     return (
@@ -40,7 +46,7 @@ const Registration = () => {
                      name="firstname" 
                      placeholder="enter first name" 
                      value = {firstname}
-                     onChange={(e) => setFirst(e.target.value) } // the displayed value field
+                     onChange = {e => setFirst(e.target.value) }
                     />
                  </div>
                  <div className="field">
