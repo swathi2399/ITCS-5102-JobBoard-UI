@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import React from 'react'
-import {Link} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const history = useHistory();
     const handleChange = async(e) => {
       e.preventDefault();
       if(email === "" || password === "") {
@@ -19,6 +20,7 @@ const Login = () => {
       password
     },{withCredentials: false});
     if (res.data) {
+      history.push("/home");
       console.log(res.data);
     }
   }

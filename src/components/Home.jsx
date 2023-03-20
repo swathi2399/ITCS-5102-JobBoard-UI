@@ -71,7 +71,8 @@ const Home1 = () => {
        <MDBCardText className = "company1">{card.company}</MDBCardText>
         <MDBCardText className = "level1">{card.Level}</MDBCardText>
         <MDBCardText className = "location1">{card.Location}</MDBCardText>
-        <MDBBtn href='#' className="btn-apply">Apply</MDBBtn>
+        {/* <MDBBtn className="btn-apply">Apply</MDBBtn> */}
+        <button className="btn-apply">Apply</button>
        </MDBCardBody>
        </MDBCard>
 
