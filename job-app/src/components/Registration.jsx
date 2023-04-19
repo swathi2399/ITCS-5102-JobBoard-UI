@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import api from '../api/users';
 import axios from 'axios';
 
@@ -9,7 +9,8 @@ const Registration = () => {
     const [lastname,setLast] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
-    const history = useHistory();
+    const [role, setRole] = useState('user');
+    const navigate = useNavigate();
     const handleSubmit = async(e) => {
         e.preventDefault();
         if(firstname === "" || lastname === "" || email === "" || password === "") {
@@ -18,17 +19,22 @@ const Registration = () => {
         }
         // const user = {firstname,lastname,email,password};
         // const response = await api.post("/users",user);
-       
-        const res = await axios.post("https://localhost:8080/api/v1/auth/register", {
+       try {
+        const res = await axios.post("http://localhost:8080/api/v1/auth/register", {
             firstname,
             lastname,
             email,
-            password
-          },{withCredentials: true});
+            password, 
+            role
+          },{withCredentials: false});
           if (res.data) {
             console.log(res.data);
-            return history.push("/login");
+            return navigate("/login");
           }
+       } catch (err) {
+            console.log(err);
+       }
+        
 
 
         
@@ -82,14 +88,24 @@ const Registration = () => {
                      onChange={(e) => setPassword(e.target.value) }// the displayed value field
                     />
                  </div>
+                <div>
+                    <label for="role">Choose a Role:</label>
 
-                 <button className="btn">Sign Up</button>
-                
+                    <select name="role" id="role" onChange={ e => setRole(e.target.value)}>
+                        <option value="user">User</option>
+                        <option value="admin">Recruiter</option>
+                        
+                    </select>
+                </div> 
+                 
+                <button className="btn">Sign Up</button>
+                   
                 
              </form>
-             <Link to="/login">
+             
+             
              <button className='link-btn'>Already have an account? Sign In</button>
-             </Link>
+             
          </div>
 
       

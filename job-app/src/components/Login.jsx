@@ -1,13 +1,22 @@
 import { useState } from 'react';
 import React from 'react'
-import {Link} from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import api from '../api/users';
 import axios from 'axios';
+import { useAuth } from './auth';
 
 const Login = () => {
+  const [user, setUser] = useState(null);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const auth = useAuth();
+  
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-    const handleChange = async(e) => {
+  
+  
+  const handleChange = async(e) => {
       e.preventDefault();
       if(email === "" || password === "") {
         alert("All the fields are mandatory")
@@ -16,12 +25,14 @@ const Login = () => {
       // const user = {email,password};
       // const response = await api.post("/users",user);
       console.log(email, password);
-      const res = await axios.post("https://localhost:8080/api/v1/auth/authenticate", {
+      const res = await axios.post("http://localhost:8080/api/v1/auth/authenticate", {
         email,
         password
-      },{withCredentials: true});
+      },{withCredentials: false});
       if (res.data) {
         console.log(res.data);
+        auth.login(res.data);
+        navigate("/");
       }
     }
    
@@ -54,9 +65,9 @@ const Login = () => {
 
                  <button className='btn'>Sign In</button>
                  </form>
-                 <Link to="/">
-                 <button className='link-btn'>Don't have an account? SignUp</button>
-                 </Link>
+                 
+                 {/* <button className='link-btn' onClick={navigate("/register")}>Don't have an account? SignUp</button> */}
+                
                 
 
     </div>
