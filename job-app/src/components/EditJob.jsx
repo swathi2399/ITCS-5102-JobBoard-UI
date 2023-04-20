@@ -103,7 +103,7 @@ const EditJob = (props) => {
                 onChange={(e) => setTemp({...temp,applicationLink:e.target.value})} />
             </div>
 
-            <button className="btn btn-primary">Update</button>
+            <button className="btn btn-primary upd">Update</button>
             
 
  

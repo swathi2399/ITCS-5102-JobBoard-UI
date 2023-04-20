@@ -14,40 +14,65 @@ const JobDetails = (props) => {
   return (
     <div>
       <Link to="/home">
-      <button className='home-btn'>Back Home</button></Link>
-      <div>
-        title: {job.title}
+      <div className="home-btn">
+      <button className='home-btn'>Back Home</button> </div></Link> 
+       
+      <div className="job-d">
+      <div className="mb-3 row">
+      <div class ="col-sm-10 tit"> 
+        {job.title}
       </div> 
-      <div>
-        company Name: {job.companyName}
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10"> 
+        Company Name: {job.companyName}
       </div> 
-      <div>
-       Description: {job.description}
-      </div> 
-      <div>
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10">
         Location: {job.location}
       </div>
-      <div>
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10">
         Experience: {job.experience}
       </div> 
-      <div>
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10">
         Job Type: {job.jobType}
       </div> 
-      <div>
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10">
         Work Mode: {job.workMode}
       </div>  
-      <div>
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10">
+        <div>Description : </div>
+        {job.description}
+      </div> 
+      </div>
+      <div className="mb-3 row">
+      <div class ="col-sm-10 btn1">
         <button> <a href={job.applicationLink} target="_blank">Apply</a> </button>
       </div> 
+      </div>
     <div>
+    <div class="row gx-2">
+      <div class="col-md-1 job1">
     <Link to = {{ pathname:`/edit/${job.id}`, state: { job }}}>
       <button>Edit</button>
     </Link>
-    </div>
-    <div>
-    <Link to = {{ pathname:`/delete/${job.id}`, state: { job }}}>
+      </div>
+      <div class = "col-md-1 job1">
+      <Link to = {{ pathname:`/delete/${job.id}`, state: { job }}}>
       <button>Delete</button>
-    </Link>
+      </Link>
+      </div>
+    </div>
+    </div>
     </div>
 
     </div>

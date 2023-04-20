@@ -15,13 +15,12 @@ const DeleteJob = (props) => {
         history.push("/home");
     };
   return (
-    <div>
+    <div className="del"> 
         <p>Are you sure, you want to delete this job?</p>
-        <button onClick={()=>{remove(job.id)}}>Yes</button> 
+        <button onClick={()=>{remove(job.id)}} className="btn-s">Yes</button> 
        <Link to= {{ pathname:`/job/${job.id}`, state: { card:job }}}>
-        <button>No</button>
+        <button className="btn-n">No</button>
         </Link>
-      
     </div>
   )
 }

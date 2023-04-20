@@ -1,14 +1,5 @@
 import React from "react";
 import { useState,useEffect } from 'react';
-import {
-    MDBCard,
-    MDBCardBody,
-    MDBCardTitle,
-    MDBCardText,
-    MDBCardHeader,
-    MDBCardFooter,
-    MDBBtn
-  } from 'mdb-react-ui-kit';
 import {Link} from 'react-router-dom';
 
 const Home = (props) => {
@@ -16,32 +7,32 @@ const Home = (props) => {
     
     const renderInfoCard = (card,index) => {
     return (
+        
     <Link to =
-    {{ pathname:`/job/${card.id}`, state: { card }}}>
-
-       <MDBCard className = "card">
-       <MDBCardHeader className = "card-title">{card.title}</MDBCardHeader>
-       <MDBCardBody>
-       <MDBCardText className = "company1">{card.companyName}</MDBCardText>
-        <MDBCardText className = "location1">{card.location}</MDBCardText>
-        {/* <MDBBtn href='#' className="btn btn-primary">Apply</MDBBtn> */}
-       </MDBCardBody>
-       </MDBCard>
+    {{ pathname:`/job/${card.id}`, state: { card }}} style={{ textDecoration: 'none' }}> 
+        
+       <div class="col">
+       <div class="card">
+         <h5 class="card-title">{card.title}</h5>
+         <p class="card-text">Company Name: {card.companyName}</p>
+         <p class="card-text">Location: {card.location}</p>
+       </div>
+       </div>
+       
     </Link>
-
     ) };
 
 return (
     <div className="home">
-            <h1 className = "head1"> This is where you find your next job</h1>
+            <h1 className = "head1">This is where you find your next job</h1>
             <Link to="/login">
             <button className="logout">Logout</button>
             </Link>
            
  
         <div class="row">
-            <div class="column" >
-            <label for=""> Job Name </label>
+            <div class="col-md" >
+            <label for="" class="p-2"> Job Name </label>
             <select name="name" id="name">
             <option value="Software Engineer">Software Engineer</option>
             <option value="Data Engineer">Data Engineer</option>
@@ -49,8 +40,8 @@ return (
             </select>
             </div>
             
-            <div class="column" >
-            <label for="">Level</label>
+            <div class="col-sm" >
+            <label for="" class="p-2 fil-lev">Level</label>
             <select name="level" id="level">
             <option value="Entry">Entry</option>
             <option value="Senior">Mid-Senior</option>
@@ -58,9 +49,9 @@ return (
             </select>
             </div>
             
-            <div class = "column">
-            <label for="">Location</label>
-            <select name="location" id="location">
+            <div class = "col-sm">
+            <label for="" class="p-2 fil-loc">Location</label>
+            <select name="location" id="location" class="fil-loc">
             <option value="SF">SF</option>
             <option value="AZ">AZ</option>
             <option value="NC">NC</option>
@@ -68,27 +59,25 @@ return (
             </select>
             </div>
 
-            <div class = "column">
-                <div className="btn-column">
-                 <button type="submit">Apply Filter</button>
+            <div class = "col-sm">
+                <div className="btn-column p-1 fil-app">
+                 <button type="btn btn-primary mb-3">Apply Filter</button>
                 </div>
             </div>
-            <div class="column">
-                <div className="btn-column">
-                <button type="submit">Clear</button>
+            <div class="col-sm">
+                <div className="btn-column p-1 fil-clr">
+                <button type="btn btn-primary mb-3">Clear</button>
                 </div>
             </div>
            
             </div>
             {/* <br/> */}
-            <div className="job-card">
-
+            <div className="row row-cols-1 row-cols-md-3 g-4">
                 {props.jobs.map(renderInfoCard)}
-            </div>
-           
-       
+            </div>   
     </div>
 )
 }
 
 export default Home;
+

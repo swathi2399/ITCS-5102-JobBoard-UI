@@ -1,5 +1,5 @@
 import api from './api/users';
-// import './App.css';
+
 import {Link} from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route,useParams } from 'react-router-dom';
 import Registration from './components/Registration';
@@ -10,7 +10,7 @@ import CreateJob from './components/CreateJob';
 import JobDetails from './components/JobDetails';
 import EditJob from './components/EditJob';
 import DeleteJob from './components/DeleteJob';
-
+import './App.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useState,useEffect } from 'react';
