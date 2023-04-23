@@ -1,0 +1,27 @@
+nav {
+    /* background-color: #7EB5DE !important; */
+}
+
+#primary-nav {
+    /* border-bottom: 1px solid #5c75bb; */
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+#secondary-nav {
+    margin-left: 1%;
+    margin-right: 1%;
+    height: 80%;
+}
+
+#navbarSupportedContent {
+    flex-direction: row-reverse;
+}
+
+.showSupportedContent {
+    display: block !important;
+}
+
+.hideSupportedContent{
+    display: none !important;
+}

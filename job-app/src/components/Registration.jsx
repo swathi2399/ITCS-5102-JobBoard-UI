@@ -41,75 +41,78 @@ const Registration = () => {
 
     }
     return (
-    <div>
-          <div className="registration">
-             
-             <h2>Registration form</h2>
-             <form className="reg-form" onSubmit={handleSubmit}>
-                 <div className="field">
-                     <label>First Name</label>
-                     <input 
-                     type="text" 
-                     name="firstname" 
-                     placeholder="enter first name" 
-                     value = {firstname}
-                     onChange={(e) => setFirst(e.target.value) } // the displayed value field
-                    />
-                 </div>
-                 <div className="field">
-                     <label>Last Name</label>
-                     <input 
-                     type="text" 
-                     name="lastname" 
-                     placeholder="enter last name" 
-                     value = {lastname}
-                     onChange={(e) => setLast(e.target.value) } // the displayed value field
-                    />
-                  
-                 </div>
-                 <div className="field">
-                     <label>Email ID</label>
-                     <input 
-                     type="text" 
-                     name="email" 
-                     placeholder="enter emailId"
-                     value = {email}
-                     onChange={(e) => setEmail(e.target.value) } //
-                  
-                     />
-                 </div>
-                 <div className="field">
-                     <label>Password</label>
-                     <input 
-                     type="password" 
-                     name="password" 
-                     placeholder="enter password" 
-                     value = {password} 
-                     onChange={(e) => setPassword(e.target.value) }// the displayed value field
-                    />
-                 </div>
-                <div>
-                    <label for="role">Choose a Role:</label>
-
-                    <select name="role" id="role" onChange={ e => setRole(e.target.value)}>
-                        <option value="user">User</option>
-                        <option value="admin">Recruiter</option>
-                        
-                    </select>
-                </div> 
-                 
-                <button className="btn">Sign Up</button>
-                   
-                
-             </form>
-             
-             
-             <button className='link-btn'>Already have an account? Sign In</button>
-             
-         </div>
-
-      
-    </div>
+        <div>
+        <div className="row">
+           <div className = "container-fluid  py-3">
+              <header class = "text-center">
+              <h2>Registration form</h2>
+              </header>
+           </div> 
+           <section class = "container-fluid my-2 w-50 text">
+           <form className="row g-6" onSubmit={handleSubmit}>
+               <div className="mb-3 row">
+               <div class ="col-sm-10 reg1"> 
+                   <label className="col-sm-2 col-form-label reg">First Name</label>
+                   <input 
+                   type="text" 
+                   name="firstname" 
+                   placeholder="Enter first name" 
+                   value = {firstname}
+                   className="form-control"
+                   onChange={(e) => setFirst(e.target.value) } // the displayed value field
+                  />
+                  </div>
+              </div>
+               <div className="mb-3 row">
+               <div class ="col-sm-10 reg1"> 
+                   <label className="col-sm-2 col-form-label reg">Last Name</label>
+                   <input 
+                   type="text" 
+                   name="lastname" 
+                   placeholder="Enter last name" 
+                   value = {lastname}
+                   className="form-control"
+                   onChange={(e) => setLast(e.target.value) } // the displayed value field
+                  />
+                </div>
+               </div>
+               <div className="mb-3 row">
+                   <div class ="col-sm-10 reg1"> 
+                   <label className="col-sm-2 col-form-label reg">Email</label>
+                   <input 
+                   type="text" 
+                   name="email" 
+                   placeholder="Enter email"
+                   className="form-control"
+                   value = {email}
+                   onChange={(e) => setEmail(e.target.value) } //
+                   />
+                   </div>
+               </div>
+               <div className="mb-3 row">
+               <div class ="col-sm-10 reg1"> 
+                   <label className="col-sm-2 col-form-label reg">Password</label>
+                   <input 
+                   type="password" 
+                   name="password" 
+                   placeholder="Enter password" 
+                   value = {password} 
+                   className="form-control"
+                   onChange={(e) => setPassword(e.target.value) }// the displayed value field
+                  />
+               </div>
+              </div>
+              <div class="col-auto reg1">
+               <button className="btn btn-primary mb-3 reg">Sign Up</button>
+              </div>
+              
+           </form>
+           <div class="col-auto reg1">
+                   <a className="text-primary" href="/">Already have an account? Sign In</a>
+            </div>
+           </section>
+       </div> 
+  </div>
   )
 };
 
