@@ -16,6 +16,7 @@ import { RequireAuth } from './components/RequireAuth';
 import { AuthProvider } from './components/auth';
 import CreateJob from './components/CreateJob';
 import "./App.css";
+import BookMark from './components/BookMark';
 
 
 function App() {
@@ -44,6 +45,11 @@ return (
         <Route exact path="/edit/:id" element={
           <RequireAuth>
             <EditJob />
+          </RequireAuth>
+        } />
+        <Route exact path="/bookMark" element={
+          <RequireAuth>
+            <BookMark />
           </RequireAuth>
         } />
         <Route exact path="/error" element={<ErrorPage/>} />
