@@ -83,7 +83,7 @@ const EditJob = () => {
                     value = {jobPosting.title}
                     onChange={(e) => setJobPosting({...jobPosting , title: e.target.value})} />
                 </div>
-                <div className='form-group mt-2'>
+                {/* <div className='form-group mt-2'>
                     <label>Company Name</label>
                     <select id="companyName" name="companyName" className="form-control" 
                     value = {jobPosting.companyName} onChange={(e) => setJobPosting({...jobPosting, companyName:e.target.value})}>
@@ -93,7 +93,7 @@ const EditJob = () => {
                         <option value="Amazon">Amazon</option>
                         <option value="AirBnB">AirBnB</option>
                     </select>
-                </div>
+                </div> */}
                 <div className='form-group mt-2'>
                     <label>Description</label>
                     <textarea name="description" 

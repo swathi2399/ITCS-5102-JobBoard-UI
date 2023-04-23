@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import api from '../api/users';
 import axios from 'axios';
 
 const Registration = () => {
@@ -102,6 +101,19 @@ const Registration = () => {
                   />
                </div>
               </div>
+              <div className="mb-3 row">
+                <div class ="col-sm-10 reg1"> 
+                <label for="role" className="col-form-label reg">Choose a Role:</label>
+
+                    <select name="role" id="role" className="form-control" onChange={ e => setRole(e.target.value)}>
+                        <option value="user">User</option>
+                        <option value="admin">Recruiter</option>
+                        
+                    </select>
+                </div>
+                    
+                </div> 
+
               <div class="col-auto reg1">
                <button className="btn btn-primary mb-3 reg">Sign Up</button>
               </div>

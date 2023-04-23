@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from './auth'
@@ -16,8 +16,36 @@ const CreateJob = () => {
     const [location,setLocation] = useState('')
     const [workMode,setWorkMode] = useState('')
     const [applicationLink,setLink] = useState('');
+    const [newCompanyName, setNewCompanyName] = useState('');
+    const [companyNames, setCompanyNames] = useState([]);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const loadCompanyNames = async () => {
+            try {
+                const res = await axios.get(
+                    "http://localhost:8080/api/v1/jobs/companies",
+                    {headers: {"Authorization" : `Bearer ${auth.user.token}`, "Content-Type": "application/json"}},
+                    {withCredentials : true}
+                );
+                if (res.data) {
+                    setCompanyNames(res.data)
+                }
+            } catch(axiosError) {
+                let { status } = axiosError.response;
+                let { message } = axiosError.response.data;
+                let error = {
+                    "status": status,
+                    "message": message
+                }
+                navigate('/error', { state : { error }});
+            }
+            
+
+        }
+        loadCompanyNames();
+    }, []);
     
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -28,7 +56,7 @@ const CreateJob = () => {
 
         const reqBody = {
             "title": title,
-            "companyName": companyName,
+            "companyName": companyName === "customOption" ? newCompanyName : companyName,
             "description": description,
             "location": location,
             "experience": experience,
@@ -78,17 +106,31 @@ const CreateJob = () => {
                 onChange={(e) => setTitle(e.target.value)} />
             </div>
             <div className='form-group m-2'>
-                <label>Company Name</label>
+                <label>Choose a Company Name</label>
                 <select id="companyName" name="companyName" className="form-control" 
                 value = {companyName} onChange={e => setCompany(e.target.value)}>
                     <option></option>
                     <option value="customOption">[type a custom value]</option>
-                    <option value="Google">Google</option>
+                    {
+                        companyNames.length > 0 && 
+                        companyNames.map(company => <option value={company}> {company} </option>)
+                    }
+                    {/* <option value="Google">Google</option>
                     <option value="Meta">Meta</option>
                     <option value="Amazon">Amazon</option>
-                    <option value="AirBnB">AirBnB</option>
+                    <option value="AirBnB">AirBnB</option> */}
                 </select>
             </div>
+            {companyName === "customOption" && <div className='form-group m-2'>
+                <label>Enter Company Name:</label>
+                <input
+                className="form-control" 
+                type = "text"
+                name = "title"
+                placeholder='Enter company name'
+                value = {newCompanyName}
+                onChange={(e) => setNewCompanyName(e.target.value)} />
+            </div>}
             <div className='form-group m-2'>
                 <label>Description</label>
                 <textarea name="description" 

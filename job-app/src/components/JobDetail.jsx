@@ -11,6 +11,7 @@ const JobDetail = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [jobPosting, setJobPosting] = useState(null);
+    const [allowEditDelete, setAllowEditDelete] = useState(false);
 
     useEffect(() => {
         if (!location || !location.state || !location.state.id) {
@@ -30,7 +31,11 @@ const JobDetail = () => {
                     {withCredentials : true}
                 );
                 console.log(res.data);
-                setJobPosting(res.data);
+                if (res.data) {
+                    setJobPosting(res.data);
+                    setAllowEditDelete(res.data.createdBy === auth.user.email);
+                }
+                
             } catch(axiosError) {
                 let { status } = axiosError.response;
                 let { message } = axiosError.response.data;
@@ -45,8 +50,45 @@ const JobDetail = () => {
         fetchJobDetail();
     }, []);
 
-    const handleApply = () => {
-        window.open(jobPosting.applicationLink, "_blank");
+    const handleApply = async () => {
+        
+        const reqBody = {
+            "title": jobPosting.title,
+            "companyName": jobPosting.companyName,
+            "description": jobPosting.description,
+            "location": jobPosting.location,
+            "experience": jobPosting.experience,
+            "jobType": jobPosting.jobType,
+            "workMode": jobPosting.workMode,
+            "applicantsApplied" : parseInt(jobPosting.applicantsApplied) + 1,
+            "createdBy": jobPosting.createdBy,
+            "bookmarkedBy": jobPosting.bookmarkedBy,
+            "applicationLink": jobPosting.applicationLink
+        };
+
+        try {
+            const res = await axios.put(
+                "http://localhost:8080/api/v1/jobs/update/" + jobPosting.jobId,
+                reqBody,
+                {headers: {"Authorization" : `Bearer ${auth.user.token}`, "Content-Type": "application/json"}},
+                {withCredentials : true}
+            );
+            if (res.data) {
+                setJobPosting(res.data);
+                window.open(jobPosting.applicationLink, "_blank");
+            }
+            
+        } catch(axiosError) {
+            let { status } = axiosError.response;
+            let { message } = axiosError.response.data;
+            let error = {
+                "status": status,
+                "message": message
+            }
+            navigate('/error', { state : { error }});
+        }
+
+        
     }
 
     const handleEditJob = () => {
@@ -102,10 +144,10 @@ const JobDetail = () => {
                             <div className="card-body">
                                 <div className='row '>
                                     <div className='col-md-10 d-flex justify-content-center text-wrap'> <h3> { jobPosting.title } </h3> </div>
-                                    <div className="col-md-2">
+                                    {allowEditDelete === true && <div className="col-md-2">
                                         <ModeEditOutlineIcon className='mx-1' style={{cursor : "pointer"}} onClick={handleEditJob}/>
                                         <DeleteIcon className='mx-1' style={{cursor : "pointer"}} sx={{ color: pink[500] }} onClick={handleDeleteJob} />
-                                    </div>
+                                    </div>}
                                 </div>
                                 <div className="row">
                                     <div className="col-md-6" style={{textAlign: "end"}} > Company:   </div>
@@ -139,7 +181,7 @@ const JobDetail = () => {
                                 <div className="row mt-3">
                                 <div className='col-md-12 d-flex justify-content-center'> 
                                         <button className='btn btn-primary m-2 rounded-3' onClick={() => handleApply()}> Apply </button> 
-                                        <button className='btn btn-success m-2 rounded-3'> Add to bookmarks </button> 
+                                        {auth?.user?.role.toLowerCase() !== "admin" && <button className='btn btn-success m-2 rounded-3'> Add to bookmarks </button> }
                                     </div>
                                 </div>
                             </div>

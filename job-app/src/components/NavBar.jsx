@@ -20,6 +20,8 @@ const NavBar = () => {
         navigate('/');
     } catch (err) {
         console.log(err);
+        auth.logout();
+        navigate('/');
     }
 }
 
@@ -37,9 +39,9 @@ const NavBar = () => {
                 </button>
                 <div className={toggleNavbar ? "collapse navbar-collapse showSupportedContent" : "collapse navbar-collapse hideSupportedContent"} id="navbarSupportedContent">
                     { auth && auth.user != null && <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
+                        {auth?.user?.role.toLowerCase() == "admin" && <li className="nav-item">
                             <Link className="nav-link" to="/create">Create Job Posting</Link>
-                        </li>
+                        </li>}
                         <li className="nav-item">
                             <Link className="nav-link" onClick={() => handleLogout()}>Log out</Link>
                         </li>
@@ -53,9 +55,9 @@ const NavBar = () => {
                     <li className="nav-item"> 
                       <Link className="nav-link" to="/">Job Postings</Link>
                     </li>
-                    <li>
+                    {auth?.user?.role.toLowerCase() !== "admin" && <li>
                     <Link className="nav-link" to="/home">Bookmarks</Link>
-                    </li>
+                    </li>}
                   </ul>}
                   </div>
             </nav>
