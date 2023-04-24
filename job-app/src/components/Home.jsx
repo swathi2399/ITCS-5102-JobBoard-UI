@@ -81,9 +81,11 @@ const Home = () => {
         let postings = jobPostings;
         if (companyName !== 'All') {
             postings = postings.filter(p => p.companyName === companyName);
-        } else if (experience !== 'All') {
+        }  
+        if (experience !== 'All') {
             postings = postings.filter(p => p.experience === experience);
-        } else if (workMode !== 'All') {
+        } 
+        if (workMode !== 'All') {
             postings = postings.filter(p => p.workMode === workMode);
         }
         setFilteredJobPostings(postings);
