@@ -12,6 +12,7 @@ const JobDetail = () => {
     const location = useLocation();
     const [jobPosting, setJobPosting] = useState(null);
     const [allowEditDelete, setAllowEditDelete] = useState(false);
+    const [bookMark,setBookMark] = useState(false);
 
     useEffect(() => {
         if (!location || !location.state || !location.state.id) {
@@ -24,6 +25,7 @@ const JobDetail = () => {
 
     useEffect(() => {
         const fetchJobDetail = async () => {
+
             try {
                 const res = await axios.get(
                     "http://localhost:8080/api/v1/jobs/" + location.state.id,
@@ -32,6 +34,7 @@ const JobDetail = () => {
                 );
                 console.log(res.data);
                 if (res.data) {
+                    setBookMark(res.data.bookmarkedBy.includes(auth.user.email))
                     setJobPosting(res.data);
                     setAllowEditDelete(res.data.createdBy === auth.user.email);
                 }
@@ -120,6 +123,53 @@ const JobDetail = () => {
         }
     }
 
+    const handleBookMark = async() => {
+        const reqBody = {
+            "title": jobPosting.title,
+            "companyName": jobPosting.companyName,
+            "description": jobPosting.description,
+            "location": jobPosting.location,
+            "experience": jobPosting.experience,
+            "jobType": jobPosting.jobType,
+            "workMode": jobPosting.workMode,
+            "applicantsApplied" : parseInt(jobPosting.applicantsApplied) + 1,
+            "createdBy": jobPosting.createdBy,
+            "bookmarkedBy": jobPosting.bookmarkedBy,
+            "applicationLink": jobPosting.applicationLink
+        };
+        try {
+            if (bookMark == true){
+                const res = await axios.post(
+                    "http://localhost:8080/api/v1/bookmarks/remove/" + jobPosting.jobId, reqBody,
+                        {headers: {"Authorization" : `Bearer ${auth.user.token}`, "Content-Type": "application/json"}},
+                        {withCredentials : true}
+                    );
+                console.log(res.data);
+                if (res.data) {
+                    setBookMark(false);
+            }}
+            else{
+                const res = await axios.post(
+                    "http://localhost:8080/api/v1/bookmarks/add/" + jobPosting.jobId, reqBody,
+                        {headers: {"Authorization" : `Bearer ${auth.user.token}`, "Content-Type": "application/json"}},
+                        {withCredentials : true}
+                    );
+                console.log(res.data);
+                if (res.data) {
+                    // setJobPosting(res.data);
+                    setBookMark(true);
+            }}
+    } catch(axiosError) {
+        let { status } = axiosError.response;
+        let { message } = axiosError.response.data;
+        let error = {
+            "status": status,
+            "message": message
+        }
+        navigate('/error', { state : { error }});
+    }
+}
+
     // {
     //     "title": "Software Development Engineer",
     //     "companyName": "Amazon",
@@ -181,7 +231,8 @@ const JobDetail = () => {
                                 <div className="row mt-3">
                                 <div className='col-md-12 d-flex justify-content-center'> 
                                         <button className='btn btn-primary m-2 rounded-3' onClick={() => handleApply()}> Apply </button> 
-                                        {auth?.user?.role.toLowerCase() !== "admin" && <button className='btn btn-success m-2 rounded-3'> Add to bookmarks </button> }
+                                        {bookMark === true && auth?.user?.role.toLowerCase() !== "admin" && <button className='btn btn-danger m-2 rounded-3'onClick= {() => handleBookMark()}>Remove BookMark</button> }
+                                        {bookMark === false && auth?.user?.role.toLowerCase() !== "admin" && <button className='btn btn-success m-2 rounded-3' onClick= {() => handleBookMark()}> Add to bookmarks </button> }
                                     </div>
                                 </div>
                             </div>

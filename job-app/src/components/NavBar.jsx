@@ -56,7 +56,7 @@ const NavBar = () => {
                       <Link className="nav-link" to="/">Job Postings</Link>
                     </li>
                     {auth?.user?.role.toLowerCase() !== "admin" && <li>
-                    <Link className="nav-link" to="/home">Bookmarks</Link>
+                    <Link className="nav-link" to="/bookMark">Bookmarks</Link>
                     </li>}
                   </ul>}
                   </div>
