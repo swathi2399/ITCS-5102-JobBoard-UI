@@ -1,0 +1,109 @@
+{
+  "users": [
+    {
+      "firstname": "Swathi",
+      "lastname": "Rajendran",
+      "email": "test@gmail.com",
+      "password": "swathi",
+      "id": 1
+    },
+    {
+      "firstname": "hiiiiiiiiiiiii",
+      "lastname": "Rajendran",
+      "email": "srajendr@uncc.edu",
+      "password": "hiiiiii",
+      "id": 2
+    },
+    {
+      "firstname": "ram",
+      "lastname": "nathan",
+      "email": "rest@gmail.com",
+      "password": "ram",
+      "id": 3
+    },
+    {
+      "firstname": "Swathi",
+      "lastname": "Rajendran",
+      "email": "swathirajendran23@gmail.com",
+      "password": "eeeeeeeeee",
+      "id": 4
+    },
+    {
+      "email": "test@gmail.com",
+      "password": "kjnnl",
+      "id": 5
+    },
+    {
+      "email": "",
+      "password": "",
+      "id": 6
+    },
+    {
+      "firstname": "wrn",
+      "lastname": "evnwl",
+      "email": "wkvjn",
+      "password": "wrvnjel",
+      "id": 7
+    },
+    {
+      "firstname": "relvre",
+      "lastname": "wkfjen",
+      "email": "ekvjne",
+      "password": "ekvjen",
+      "id": 8
+    },
+    {
+      "firstname": "elgnjv",
+      "lastname": "vjne",
+      "email": "vjne",
+      "password": "wrgvljne",
+      "id": 9
+    }
+  ],
+  "jobs": [
+    {
+      "title": "awlru",
+      "companyName": "Amazon",
+      "description": "erkgn",
+      "location": "wgl",
+      "experience": "2-4",
+      "jobType": "full-time",
+      "workMode": "onsite",
+      "applicationLink": "https://careers.northwesternmutual.com/corporate-careers/job/software-engineer-milwaukee-wi-corporate-jr-37374/",
+      "id": 3
+    },
+    {
+      "title": "serdrftguyhijko",
+      "companyName": "Google",
+      "description": "drtfytguhijo",
+      "location": "seattle",
+      "experience": "0-2",
+      "jobType": "full-time",
+      "workMode": "onsite",
+      "applicationLink": "cchvgjhkjk",
+      "id": 5
+    },
+    {
+      "title": "data",
+      "companyName": "Amazon",
+      "description": "wvm wmvw",
+      "location": "New York",
+      "experience": "2-4",
+      "jobType": "internship",
+      "workMode": "remote",
+      "applicationLink": "https://amazon.jobs/en/jobs/2124803/data-engineer-ii-amz6253",
+      "id": 7
+    },
+    {
+      "title": "data",
+      "companyName": "Google",
+      "description": "xdgfhgjhkujilko;",
+      "location": "fgjhkujil",
+      "experience": "0-2",
+      "jobType": "full-time",
+      "workMode": "onsite",
+      "applicationLink": "https://careers.northwesternmutual.com/corporate-careers/job/software-engineer-milwaukee-wi-corporate-jr-37374/",
+      "id": 8
+    }
+  ]
+}
