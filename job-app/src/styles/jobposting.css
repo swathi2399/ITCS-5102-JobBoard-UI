@@ -1,0 +1,5 @@
+.job-card {
+    width: 18rem !important;
+    margin: 2%;
+    cursor: pointer;
+}
